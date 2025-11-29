@@ -21,14 +21,27 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+     public function definition(): array
     {
+        $levels = ['Vip', 'Medium', 'Normal'];
+
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $this->faker->name('male'|'female'), // Tên Việt Nam
+            'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => bcrypt('password'), // mật khẩu mặc định
             'remember_token' => Str::random(10),
+            'google_id' => null,
+            'google_access_token' => null,
+            'google_refresh_token' => null,
+            'google_scopes' => null,
+            'avatar' => $this->faker->imageUrl(200, 200, 'people'), // ảnh giả
+            'point' => $this->faker->numberBetween(0, 1000),
+            'contribution_points' => $this->faker->numberBetween(0, 500),
+            'check_first_login' => $this->faker->boolean(50),
+            'level' => $this->faker->randomElement($levels),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 
