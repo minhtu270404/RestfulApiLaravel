@@ -14,19 +14,24 @@ return new class extends Migration {
             $table->id();
             $table->string('name')->index();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+
             $table->string('google_id')->nullable();
             $table->text('google_access_token')->nullable();
             $table->text('google_refresh_token')->nullable();
             $table->longText('google_scopes')->nullable();
+
             $table->string('avatar')->nullable();
             $table->integer('point')->nullable();
             $table->integer('contribution_points')->nullable();
+
             $table->integer('check_first_login')->nullable();
+            
             $table->enum('level', ['Vip', 'Medium', 'Normal'])->default('Normal');
+
+            $table->rememberToken();
+            $table->timestamps();
         });
 
     }

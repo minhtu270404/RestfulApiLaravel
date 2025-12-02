@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\Frontend\UserController;
+use App\Http\Controllers\Api\Frontend\UserInfoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// TODO: V1
+
+Route::prefix('v1/')->group(function () {
+
+    Route::prefix('users')
+        ->controller(UserController::class)
+        ->group(function () {
+            Route::get('/', 'index');
+            Route::post('/store', 'store');
+            Route::put('/update/{userId}/', 'update');
+            Route::get('/{userId}', 'show');
+            Route::get('/destroy/{userId}', 'destroy');
+
+        });
+    Route::prefix('user-info')
+        ->controller(UserInfoController::class)
+        ->group(function () {
+            Route::put('/update/{userId}', 'update');
+            Route::get('/{userId}', 'show');
+        });
 });

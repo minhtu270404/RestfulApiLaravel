@@ -14,6 +14,19 @@ class UserResources extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'avatar' => $this->avatar,
+            'point' => $this->point,
+            'ontribution_points' => $this->ontribution_points,
+            'check_first_login' => $this->check_first_login,
+            'level' => $this->level,
+            'userInfo'=> new UserInfoResources($this->whenLoaded('userInfo')),
+            'email_verified_at' => $this->email_verified_at?->format('Y-m-d H:i:s'),
+            'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updated_at?->format('Y-m-d H:i:s'),
+        ];
     }
 }

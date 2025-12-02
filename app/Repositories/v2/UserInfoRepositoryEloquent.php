@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\v2;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\UserRepositoryRepository;
-use App\Entities\UserRepository;
-use App\Validators\UserRepositoryValidator;
+use App\Repositories\v2\UserInfoRepository;
+use App\Entities\v2\UserInfo;
+use App\Validators\v2\UserInfoValidator;
 
 /**
- * Class UserRepositoryRepositoryEloquent.
+ * Class UserInfoRepositoryEloquent.
  *
- * @package namespace App\Repositories;
+ * @package namespace App\Repositories\V2;
  */
-class UserRepositoryRepositoryEloquent extends BaseRepository implements UserRepositoryRepository
+class UserInfoRepositoryEloquent extends BaseRepository implements UserInfoRepository
 {
     /**
      * Specify Model class name
@@ -22,10 +22,10 @@ class UserRepositoryRepositoryEloquent extends BaseRepository implements UserRep
      */
     public function model()
     {
-        return UserRepository::class;
+        return UserInfo::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +34,5 @@ class UserRepositoryRepositoryEloquent extends BaseRepository implements UserRep
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }
